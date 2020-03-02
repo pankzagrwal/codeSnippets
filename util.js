@@ -70,3 +70,33 @@ String.prototype.toUnderscore = function () {
     
     return strArr.join("");
 }
+
+// INPUT
+// obj = {
+//     "key": 3,
+//     "foo": {
+//         "a": 5,
+//         "bar": {
+//             "baz": 8
+//         }
+//     }
+// }
+
+// OUTPUT
+
+// {
+//     "key": 3,
+//     "foo.a": 5,
+//     "foo.bar.baz": 8
+// }
+
+function flat (obj, result = {}, parentKey = []) {
+	for (let key in obj) {
+		const k = parentKey.length ? `${parentKey.join('.')}.${key}` : key
+		if (typeof obj[key] === 'object') {
+			parentKey = [...parentKey, key]
+			flat(obj[key], result, parentKey)	
+		}
+		result[k] = obj[key];
+	}
+}

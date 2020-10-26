@@ -29,6 +29,35 @@ var lengthOfLongestSubstring = function(s) {
 };
 ```
 
+##### Rotate Image
+```javascript
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [[7,4,1],[8,5,2],[9,6,3]]
+```
+```javascript
+var rotate = function(matrix) {
+    
+    // swap (i,j) with (j,i)
+    for (let i = 0; i < matrix.length -1; i++) {
+        for (let j = i; j < matrix.length; j++) {
+            const temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
+        }
+    }
+    
+    //swap the items of same column
+    for (i = 0; i< matrix.length/2; i++) {
+        for (j = 0; j < matrix.length; j++) {
+            const temp = matrix[j][i];
+             matrix[j][i] = matrix[j][matrix.length -1 -i]
+            matrix[j][matrix.length - 1 - i] = temp 
+        }
+    }
+    
+};
+```
+
 
 ##### Add method to "String", to convert camelCase string to camel_case.
 

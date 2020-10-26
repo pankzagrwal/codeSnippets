@@ -1,51 +1,34 @@
-##### Get factorial
+#####  Longest Substring Without Repeating Characters
+
 ```javascript
-var factorial = function (n) {
-  if (n < 0) {
-  	return 1;
-  }
-  else {
-  	return n * factorial (n-1)
-  }
-}
+var lengthOfLongestSubstring = function(s) {
+    //hash to keep all the element of string with index
+    let hash = {}
+    let curr_max = 0
+    for (let i = 0; i < s.length; i++) {
+       const elm = s[i]
+       // if element is not present than add it with the index and increment the max
+       if (!hash[elm] && hash[elm] < 0) {
+            hash[elm] = i
+           curr_max++
+       }
+        // if element is present, remove all the element whose index is <=  the current element 
+	// and add the current element with the updated index and recalculate the max string length
+       else {
+           const lastElmIndex = hash[elm]
+           for (let key in hash) {
+               if (hash[key] <= lastElmIndex) {
+                   delete hash[key]
+               }
+           }
+           hash[elm] = i
+           curr_max = Math.max(curr_max, Object.keys(hash).length)
+       }
+    }
+    return curr_max;
+};
 ```
 
-##### Get the fibonacci series
-```javascript
-var fiboSeries = function (s) {
-	var series = [],
-  		i = 1;
-  // Get element at specific location in series
-  var fibo = function (n) {
-    if (n<=2) {
-    return 1;
-    }
-    else {
-    return fibo(n-1) + fibo(n-2)
-    }
-  }
-  for (;i<= s; i++) {
-  	series.push(fibo(i))
-  }
-  return series;
-}
-```
-
-
-##### Check if prime or not
-```javascript
-var prime = function (n) {
-	let i = 2,
-  		ret = true;
-  for (; i< n-1; i++) {
-  	if (n%i === 0) {
-    	ret = false;
-      break;
-    }
-  }
-  return ret;
-}
-```
 
 ##### Add method to "String", to convert camelCase string to camel_case.
 
@@ -138,3 +121,37 @@ function sentence(a) {
     }
 }
 ```
+
+##### Get factorial
+```javascript
+var factorial = function (n) {
+  if (n < 0) {
+  	return 1;
+  }
+  else {
+  	return n * factorial (n-1)
+  }
+}
+```
+
+##### Get the fibonacci series
+```javascript
+var fiboSeries = function (s) {
+	var series = [],
+  		i = 1;
+  // Get element at specific location in series
+  var fibo = function (n) {
+    if (n<=2) {
+    return 1;
+    }
+    else {
+    return fibo(n-1) + fibo(n-2)
+    }
+  }
+  for (;i<= s; i++) {
+  	series.push(fibo(i))
+  }
+  return series;
+}
+```
+

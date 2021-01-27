@@ -182,5 +182,5 @@ var fiboSeries = function (s) {
   }
   return series;
 }
-```
+``` 
 

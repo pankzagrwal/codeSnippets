@@ -184,3 +184,66 @@ var fiboSeries = function (s) {
 }
 ``` 
 
+
+##### Convert multidimentional array in format of [root, left_child, right_child] to binary tree
+##### Construct a binary tree from given multidimentional array
+
+eg. `[1,[2,4,5], [3,6,7]]` to
+
+				1
+				
+		2				3
+		
+	4		5		6		7
+	
+	
+```javascript
+	
+function Node (value, left, right){
+    this.value = value;
+    this.left = left;
+    this.right = right;
+}
+
+function convertArrayToNodeBasedBinaryTree(arr, node) {
+  
+  if (!arr || arr.length === 0) {
+    return null;
+  }
+  
+  let parent = node;
+  
+  if (!parent) {
+    parent = new Node(arr[0]);
+  }
+  
+  const left = arr[1] || null;
+  const right = arr[2] || null;
+  
+  let leftNode;
+  let rightNode;
+  
+  if (Array.isArray(left)) {
+    leftNode = new Node(left[0]);
+  }
+  else {
+    leftNode = left ? new Node(left) : null;
+  }
+  
+   if (Array.isArray(right)) {
+    rightNode = new Node(right[0]);
+  }
+  else {
+    rightNode = right ? new Node(right) : null;
+  }
+  parent.left = leftNode;
+  parent.right = rightNode;
+  
+  process(left, leftNode)
+  process(right, rightNode)
+  
+  return parent;
+  
+}
+
+``` 
